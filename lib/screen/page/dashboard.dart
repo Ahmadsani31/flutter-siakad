@@ -14,7 +14,7 @@ class DashboardPage extends StatefulWidget {
 
 class _DashboardPagePageState extends State<DashboardPage> {
   late Future<ResProfil> resProfil;
-  String sToken = '';
+  var sToken;
 
   final dio = Dio();
   void setupBasicAuth() {
@@ -30,24 +30,17 @@ class _DashboardPagePageState extends State<DashboardPage> {
   void initState() {
     // TODO: implement initState
     setState(() {
-      cekToken();
       getDataProfil();
     });
     super.initState();
     resProfil = getDataProfil();
   }
 
-  void cekToken() async {
-    sToken = await Helper.getUserData();
-    if (sToken.isEmpty) {
-      Navigator.pushNamed(context, '/');
-    }
-  }
-
   Future<ResProfil> getDataProfil() async {
+    sToken = await Helper.getUserData();
     setupBasicAuth();
-    final response = await dio.get(
-        'https://api-siakad.itp.ac.id/mahasiswa/profil?token=RkdsaWFneFUzckloNUZZU3hGdm9ldz09');
+    final response = await dio
+        .get('https://api-siakad.itp.ac.id/mahasiswa/profil?token=$sToken');
     print(response.data);
     if (response.statusCode == 200) {
       print(response.data['items']);
@@ -61,6 +54,7 @@ class _DashboardPagePageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
+    print(sToken);
     Color color = Theme.of(context).primaryColor;
 
     Widget buttonSection = Row(

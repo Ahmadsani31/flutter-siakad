@@ -68,7 +68,7 @@ class _LoginPage extends State<LoginPage> {
       });
       try {
         Response response = await dio.post(
-          'https://api-presensi.itp.ac.id/APIGet',
+          'https://api-siakad.itp.ac.id/auth/login',
           data: formData,
         );
 

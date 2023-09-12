@@ -34,6 +34,9 @@ class _MyHomePage extends State<HomePage> {
 
   void cekToken() async {
     sToken = await Helper.getUserData();
+    if (sToken.isEmpty) {
+      Navigator.pushNamed(context, '/');
+    }
   }
 
   void showAlert() {
@@ -86,7 +89,13 @@ class _MyHomePage extends State<HomePage> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
-          child: Icon(Icons.add),
+          child: Icon(
+            Icons.add,
+          ),
+          elevation: 0.1,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25),
+          ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: BottomAppBar(
@@ -101,7 +110,7 @@ class _MyHomePage extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     MaterialButton(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      minWidth: 75.0,
                       onPressed: () {
                         setState(() {
                           _isTitle = 'Dashboard';
@@ -127,8 +136,7 @@ class _MyHomePage extends State<HomePage> {
                       ),
                     ),
                     MaterialButton(
-                      minWidth: 10,
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      minWidth: 75.0,
                       onPressed: () {
                         setState(() {
                           _isTitle = 'MataKuliah';
@@ -159,7 +167,7 @@ class _MyHomePage extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     MaterialButton(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      minWidth: 75.0,
                       onPressed: () {
                         setState(() {
                           _isTitle = 'Jadwal';
