@@ -29,9 +29,9 @@ class _DashboardPagePageState extends State<DashboardPage> {
   @override
   void initState() {
     // TODO: implement initState
-    setState(() {
-      getDataProfil();
-    });
+    // setState(() {
+    //   getDataProfil();
+    // });
     super.initState();
     resProfil = getDataProfil();
   }
@@ -85,7 +85,7 @@ class _DashboardPagePageState extends State<DashboardPage> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Container(
-              padding: const EdgeInsets.all(32),
+              padding: const EdgeInsets.all(10),
               child: Row(
                 children: [
                   Expanded(

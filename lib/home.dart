@@ -5,6 +5,7 @@ import 'package:siakat/components/button.dart';
 import 'package:siakat/screen/login/register.dart';
 import 'package:siakat/screen/page/dashboard.dart';
 import 'package:siakat/screen/page/jadwal.dart';
+import 'package:siakat/screen/page/krs.dart';
 import 'package:siakat/screen/page/mk.dart';
 import 'package:siakat/ultis/helper.dart';
 
@@ -19,7 +20,12 @@ class _MyHomePage extends State<HomePage> {
   var _isTitle;
 
   int currentTab = 0;
-  final List<Widget> screen = [DashboardPage(), MkPage(), JadwalPage()];
+  final List<Widget> screen = [
+    DashboardPage(),
+    MkPage(),
+    JadwalPage(),
+    KRSPage()
+  ];
 
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = DashboardPage();
@@ -29,7 +35,9 @@ class _MyHomePage extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    cekToken();
+    setState(() {
+      cekToken();
+    });
   }
 
   void cekToken() async {
@@ -65,6 +73,7 @@ class _MyHomePage extends State<HomePage> {
     print(_isTitle ?? 'Dashbaord');
 
     return Scaffold(
+        extendBody: true,
         appBar: AppBar(
           backgroundColor: Colors.blueAccent,
           actions: [
@@ -90,7 +99,7 @@ class _MyHomePage extends State<HomePage> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
           child: Icon(
-            Icons.add,
+            Icons.qr_code,
           ),
           elevation: 0.1,
           shape: RoundedRectangleBorder(
@@ -170,8 +179,8 @@ class _MyHomePage extends State<HomePage> {
                       minWidth: 75.0,
                       onPressed: () {
                         setState(() {
-                          _isTitle = 'Jadwal';
-                          currentScreen = JadwalPage();
+                          _isTitle = 'Halaman KRS';
+                          currentScreen = KRSPage();
                           currentTab = 2;
                         });
                       },
@@ -183,9 +192,35 @@ class _MyHomePage extends State<HomePage> {
                             color: currentTab == 2 ? Colors.blue : Colors.grey,
                           ),
                           Text(
-                            'Jadwal',
+                            'KRS',
                             style: TextStyle(
                                 color: currentTab == 2
+                                    ? Colors.blue
+                                    : Colors.grey),
+                          )
+                        ],
+                      ),
+                    ),
+                    MaterialButton(
+                      minWidth: 75.0,
+                      onPressed: () {
+                        setState(() {
+                          _isTitle = 'Jadwal';
+                          currentScreen = JadwalPage();
+                          currentTab = 3;
+                        });
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.earbuds,
+                            color: currentTab == 3 ? Colors.blue : Colors.grey,
+                          ),
+                          Text(
+                            'Jadwal',
+                            style: TextStyle(
+                                color: currentTab == 3
                                     ? Colors.blue
                                     : Colors.grey),
                           )
